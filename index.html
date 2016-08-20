@@ -54,6 +54,14 @@
         loadedLabels,
         function() { console.log("Failed to load labels"); }
       );
+
+// // New Part
+//     Trello.get(
+//       '/cards/CARD_ID/actions?filter=updateCard:idList'
+//     );
+
+// end new part
+
     });
 
     Trello.authorize({
@@ -61,7 +69,7 @@
       name: "Trello dashboard",
       scope: {
         read: true,
-        write: false },
+        write: true },
       expiration: "never",
       success: loadBoards,
       error: function() { console.log("Failed authentication"); }
