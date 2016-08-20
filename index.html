@@ -56,9 +56,12 @@
       );
 
 // // New Part
-//     Trello.get(
-//       '/cards/CARD_ID/actions?filter=updateCard:idList'
-//     );
+      var cardId = '57b829a304080582c49f0a43'
+      Trello.get(
+        '/cards/' + cardId + '/actions?filter=updateCard:idList',
+        loadedCards,
+        function() { console.log("Failed to load cards")}
+      );
 
 // end new part
 
