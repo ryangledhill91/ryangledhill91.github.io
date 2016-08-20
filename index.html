@@ -15,6 +15,7 @@
       </form>
 
       <div id="labels"></div>
+      <div id="cards"></div>
     </div>
   </body>
 
@@ -39,6 +40,13 @@
       );
     };
 
+    var loadedCards = function(cards) {
+        $.each(cards, function(index, card) {
+            $('#cards')
+                .append("<p>" + card.date + "</p>")
+        });
+    };
+
     var loadedLabels = function(labels) {
       $.each(labels, function(index, label) {
         var label = $("<p><span class='badge' style='background:" + label.color + ";'>" + label.uses + "</span> " + label.name + "</p>");
@@ -55,6 +63,15 @@
         function() { console.log("Failed to load labels"); }
       );
     });
+
+    var cardId = '57b829a304080582c49f0a43';
+    Trello.get(
+        '/cards/' + cardId + '/actions?filter=updateCard:idList',
+        loadedCards,
+        function() {
+            console.log("Failed to load cards")
+        }
+    );
 
     Trello.authorize({
       type: "popup",
