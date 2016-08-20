@@ -52,10 +52,10 @@
     };
 
     var loadedCards = function(cards) {
-      $.each(cards, function(index, card) {
-        $('#cards')
-          .append($("<p>" + card.date + "</p>"))
-      });
+        $.each(cards, function(index, card) {
+            $('#cards')
+                .append($("<p>" + card.date + "</p>"))
+        });
     };
 
     $('#boards').change(function() {
@@ -79,7 +79,7 @@
                 console.log("Failed to load cards")
             }
         );
-    }
+    })
 
     // end new part
 
