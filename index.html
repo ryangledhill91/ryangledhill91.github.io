@@ -15,6 +15,7 @@
       </form>
 
       <div id="labels"></div>
+      <div id="cards"></div>
     </div>
   </body>
 
@@ -62,6 +63,13 @@
         loadedCards,
         function() { console.log("Failed to load cards")}
       );
+
+      var loadedCards = function(cards) {
+        $.each(cards, function(index, card) {
+          $('#cards')
+            .append($("<p>" + card.date + "</p>"));
+        });
+      }
 
 // end new part
 
