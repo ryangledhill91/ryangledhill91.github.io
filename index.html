@@ -1,101 +1,70 @@
 <html>
-
-<head>
+  <head>
     <title>A Trello Dashboard</title>
     <link rel="stylesheet" media="screen" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-</head>
-
-<body>
+  </head>
+  <body>
     <div class="container">
-        <h1>Trello Dashboard</h1>
+      <h1>Trello Dashboard</h1>
 
-        <form class="form-horizontal" id="boards_form">
-            <div class="form-group">
-                <label class="control-label">Choose your board</label>
-                <select class="form-control" id="boards"></select>
-            </div>
-        </form>
+      <form class="form-horizontal" id="boards_form">
+        <div class="form-group">
+          <label class="control-label">Choose your board</label>
+            <select class="form-control" id="boards"></select>
+        </div>
+      </form>
 
-        <div id="labels"></div>
-        <div id="cards"></div>
+      <div id="labels"></div>
     </div>
-</body>
+  </body>
 
-<script src="http://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>
-<script src="https://api.trello.com/1/client.js?key=4e07fe2459f4fa4a8ecf0de50ca59abe"></script>
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>
+  <script src="https://api.trello.com/1/client.js?key=4e07fe2459f4fa4a8ecf0de50ca59abe"></script>
 
-<script type="text/javascript">
+  <script type="text/javascript">
     var loadedBoards = function(boards) {
-        $.each(boards, function(index, value) {
-            $('#boards')
-                .append($("<option></option>")
-                    .attr("value", value.id)
-                    .text(value.name));
-        });
+      $.each(boards, function(index, value) {
+        $('#boards')
+          .append($("<option></option>")
+          .attr("value",value.id)
+          .text(value.name));
+      });
     };
     var loadBoards = function() {
-        //Get the users boards
-        Trello.get(
-            '/members/me/boards/',
-            loadedBoards,
-            function() {
-                console.log("Failed to load boards");
-            });
+      //Get the users boards
+      Trello.get(
+        '/members/me/boards/',
+        loadedBoards,
+        function() { console.log("Failed to load boards"); }
+      );
     };
 
     var loadedLabels = function(labels) {
-        $.each(labels, function(index, label) {
-            var label = $("<p><span class='badge' style='background:" + label.color + ";'>" + label.uses + "</span> " + label.name + "</p>");
-            $('#labels').append(label)
-        });
+      $.each(labels, function(index, label) {
+        var label = $("<p><span class='badge' style='background:" + label.color + ";'>" + label.uses + "</span> " + label.name + "</p>");
+        $('#labels').append(label)
+      });
     };
-
-    var loadedCards = function(cards) {
-        $.each(cards, function(index, card) {
-            $('#cards')
-                .append("<p>" + card.date + "</p>")
-        });
-    };
-
     $('#boards').change(function() {
-        var boardId = $("option:selected", this).val();
-        $('#labels').empty();
+      var boardId = $("option:selected", this).val();
+      $('#labels').empty();
 
-        Trello.get(
-            '/boards/' + boardId + '/labels',
-            loadedLabels,
-            function() {
-                console.log("Failed to load labels");
-            }
-        );
+      Trello.get(
+        '/boards/' + boardId + '/labels',
+        loadedLabels,
+        function() { console.log("Failed to load labels"); }
+      );
     });
-
-
-    // // New Part
-    // var cardId = '57b829a304080582c49f0a43';
-    // Trello.get(
-    //     '/cards/' + cardId + '/actions?filter=updateCard:idList',
-    //     loadedCards,
-    //     function() {
-    //         console.log("Failed to load cards")
-    //     }
-    // );
-
-    // end new part
 
     Trello.authorize({
-        type: "popup",
-        name: "Trello dashboard",
-        scope: {
-            read: true,
-            write: true
-        },
-        expiration: "never",
-        success: loadBoards,
-        error: function() {
-            console.log("Failed authentication");
-        }
+      type: "popup",
+      name: "Trello dashboard",
+      scope: {
+        read: true,
+        write: false },
+      expiration: "never",
+      success: loadBoards,
+      error: function() { console.log("Failed authentication"); }
     });
-</script>
-
+  </script>
 </html>
