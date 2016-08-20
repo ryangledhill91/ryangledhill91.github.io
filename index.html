@@ -40,8 +40,7 @@
             loadedBoards,
             function() {
                 console.log("Failed to load boards");
-            }
-        );
+            });
     };
 
     var loadedLabels = function(labels) {
@@ -59,43 +58,42 @@
     };
 
     $('#boards').change(function() {
-        var boardId = $("option:selected", this).val();
-        $('#labels').empty();
+                var boardId = $("option:selected", this).val();
+                $('#labels').empty();
 
-        Trello.get(
-            '/boards/' + boardId + '/labels',
-            loadedLabels,
-            function() {
-                console.log("Failed to load labels");
-            }
-        );
+                Trello.get(
+                    '/boards/' + boardId + '/labels',
+                    loadedLabels,
+                    function() {
+                        console.log("Failed to load labels");
+                    });
+            };
 
-        // // New Part
-        var cardId = '57b829a304080582c49f0a43'
-        Trello.get(
-            '/cards/' + cardId + '/actions?filter=updateCard:idList',
-            loadedCards,
-            function() {
-                console.log("Failed to load cards")
-            }
-        );
-    })
+            // // New Part
+            var cardId = '57b829a304080582c49f0a43'
+            Trello.get(
+                '/cards/' + cardId + '/actions?filter=updateCard:idList',
+                loadedCards,
+                function() {
+                    console.log("Failed to load cards")
+                }
+            );
 
-    // end new part
+            // end new part
 
-    Trello.authorize({
-        type: "popup",
-        name: "Trello dashboard",
-        scope: {
-            read: true,
-            write: true
-        },
-        expiration: "never",
-        success: loadBoards,
-        error: function() {
-            console.log("Failed authentication");
-        }
-    });
+            Trello.authorize({
+                type: "popup",
+                name: "Trello dashboard",
+                scope: {
+                    read: true,
+                    write: true
+                },
+                expiration: "never",
+                success: loadBoards,
+                error: function() {
+                    console.log("Failed authentication");
+                }
+            });
 </script>
 
 </html>
