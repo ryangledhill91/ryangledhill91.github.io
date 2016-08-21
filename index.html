@@ -42,13 +42,9 @@
 
     var loadedCards = function(cards) {
         $.each(cards, function(index, card) {
-          var todaysDate = new Date();
-          var activityDate = new Date(card.date);
-          console.log("Today's date :" + todaysDate);
           //console.log("New list: " + card.data.listAfter.name);
           var card = $("<p>" + card.date + "</p>");
             $('#cards').append(card)
-            console.log("Date diff: " + (todaysDate - activityDate));
         });
     };
 
