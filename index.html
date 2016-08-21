@@ -49,7 +49,7 @@
 
           // Time difference calculation
           var timeDiff = Math.abs(todaysDate.getTime() - cardDate.getTime());
-          var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+          var diffDays = Math.floor(timeDiff / (1000 * 3600 * 24));
           console.log(diffDays);
 
           // Diff hours
