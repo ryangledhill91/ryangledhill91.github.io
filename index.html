@@ -45,7 +45,8 @@
           //console.log("New list: " + card.data.listAfter.name);
           var cardDate = new Date(card.date);
           var todaysDate = new Date();
-          console.log(todaysDate);
+          console.log(todaysDate - cardDate);
+          console.log(cardDate - todaysDate);
           var card = $("<p>" + cardDate + " - moved from " + card.data.listBefore.name + " to " + card.data.listAfter.name + "</p>");
             $('#cards').append(card)
         });
