@@ -44,7 +44,9 @@
         $.each(cards, function(index, card) {
           //console.log("New list: " + card.data.listAfter.name);
           var cardDate = new Date(card.date);
-          var card = $("<p>" + cardDate + "- moved from " + card.data.listBefore.name + "to " + card.data.listAfter.name + "</p>");
+          var todaysDate = new Date();
+          console.log(todaysDate);
+          var card = $("<p>" + cardDate + " - moved from " + card.data.listBefore.name + " to " + card.data.listAfter.name + "</p>");
             $('#cards').append(card)
         });
     };
