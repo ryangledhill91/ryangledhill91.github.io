@@ -43,7 +43,8 @@
     var loadedCards = function(cards) {
         $.each(cards, function(index, card) {
           //console.log("New list: " + card.data.listAfter.name);
-          var card = $("<p>" + card.date + "</p>");
+          var cardDate = new Date(card.date);
+          var card = $("<p>" + cardDate + "</p>");
             $('#cards').append(card)
         });
     };
