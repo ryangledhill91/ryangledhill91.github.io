@@ -45,18 +45,13 @@
           //console.log("New list: " + card.data.listAfter.name);
           var cardDate = new Date(card.date);
           var todaysDate = new Date();
-          var diff = todaysDate - cardDate;
+          // var diff = todaysDate - cardDate;
 
           // Time difference calculation
-          var numDays = Math.floor(diff / 86400);
-          var numHours = Math.floor((diff % 86400) / 3600);
-          var numMinutes = Math.floor(((diff % 86400) % 3600) / 60);
-          var numSeconds = ((diff % 86400) % 3600) % 60;
-
-          console.log("Days: " + numDays + " hours: " + numHours + ".");
+          var timeDiff = Math.abs(todaysDate.getTime() - cardDate.getTime());
+          var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+          console.log(diffDays);
           // ------------------------------
-
-
           var card = $("<p>" + cardDate + " - moved from " + card.data.listBefore.name + " to " + card.data.listAfter.name + "</p>");
             $('#cards').append(card)
         });
