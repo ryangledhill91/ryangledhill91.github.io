@@ -51,6 +51,10 @@
           var timeDiff = Math.abs(todaysDate.getTime() - cardDate.getTime());
           var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
           console.log(diffDays);
+
+          // Diff hours
+          var diffHours = Math.floor(timeDiff / 3600000 % 24);
+          console.log("Hours: " + diffHours);
           // ------------------------------
           var card = $("<p>" + cardDate + " - moved from " + card.data.listBefore.name + " to " + card.data.listAfter.name + "</p>");
             $('#cards').append(card)
