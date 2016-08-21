@@ -43,7 +43,7 @@
     var loadedCards = function(cards) {
         $.each(cards, function(index, card) {
           var dateObject = new Date(card.date);
-          console.log("Date object= " + dateObject);
+          console.log("Date object= " + (dateObject.getMonth() + 1) + dateObject.getFullYear());
           var card = $("<p>" + card.date + "</p> <p></p>");
             $('#cards').append(card)
         });
